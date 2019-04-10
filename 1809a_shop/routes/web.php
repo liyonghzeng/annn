@@ -13,5 +13,23 @@
 
 Route::get('/', function () {
     // return view('welcome');
-    phpinfo();
+   phpinfo();
 });
+
+//微信/
+
+Route::get('weixin/ui',"WeixinController@nake");
+Route::post('weixin/ui',"WeixinController@index");
+
+Route::get('weixin/AccessToren',"WeixinController@AccessToren");
+Route::get('weixin/test',"WeixinController@test");
+
+
+
+
+
+
+
+
+
+
