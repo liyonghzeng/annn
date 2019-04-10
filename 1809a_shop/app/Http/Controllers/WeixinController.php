@@ -48,7 +48,7 @@ class WeixinController extends Controller
                     'sex'  => $u['sex'],
                     'headimgurl'  => $u['headimgurl'],
                 ];
-                $id = WxUserModel::insertGetId($u_info);
+                $id = Wx::insertGetId($u_info);
                 echo '<xml><ToUserName><![CDATA['.$openid.']]></ToUserName><FromUserName><![CDATA['.$wx_id.']]></FromUserName><CreateTime>'.time().'</CreateTime><MsgType><![CDATA[text]]></MsgType><Content><![CDATA['. '欢迎关注 '. $u['nickname'] .']]></Content></xml>';
             }
         }
@@ -86,7 +86,13 @@ class WeixinController extends Controller
         echo $access_token;
     }
 
-
+    public function getUserInfo($openid)
+    {
+        $url = 'https://api.weixin.qq.com/cgi-bin/user/info?access_token='.$this->getAccessToken().'&openid='.$openid.'&lang=zh_CN';
+        $data = file_get_contents($url);
+        $u = json_decode($data,true);
+        return $u;
+    }
 
 
 
